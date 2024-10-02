@@ -1,0 +1,72 @@
+/* General styles for the body */
+body {
+    font-family: "Arial", sans-serif;
+    margin: 20;
+    padding: 20;
+}
+
+/* Hover zone near the left edge (20px wide) */
+#hoverZone {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 50px; /* Small hover zone area */
+    background-color: transparent; /* Invisible zone */
+    z-index: 2; /* Make sure it's on top of other elements */
+}
+
+/* Style for the side panel */
+.side-panel {
+    height: 100%;
+    width: 200;
+    margin-left: 20px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: width 0.5s ease; /* Smooth transition for opening/closing */
+    padding-top: 60px;
+}
+
+/* Side panel links */
+.side-panel a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 22px;
+    color: rgb(181, 10, 10);
+    display: block;
+    transition: background-color 0.3s;
+}
+
+/* Change color on hover for links */
+.side-panel a:hover {
+    background-color: #19b924;
+}
+
+/* Close button inside the side panel */
+/* .side-panel .close-btn {
+    position: absolute;
+    top: 025;
+    right: 25px;
+    font-size: 36px;
+} */
+
+/* Main content area */
+#mainContent {
+    padding: 50px;
+    margin-left: 150px;
+    transition: margin-left 0.5s ease; /* Smooth transition when content moves */
+}
+
+/* Open the side panel and move content when hover zone is triggered */
+.open-panel #sidePanel {
+    width: 250px;
+    background-color : #d20f0f;
+}
+
+.open-panel #mainContent {
+    margin-left: 250px;
+}

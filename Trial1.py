@@ -1,53 +1,34 @@
-import mysql.connector
-from mysql.connector import Error
+from flask import Flask, render_template, request, jsonify
 
-try:
-    # Connect to MySQL Server
-    connection = mysql.connector.connect(
-        host='localhost',         # Replace with your hostname (e.g., 'localhost' or IP address)
-        user='root',              # Replace with your MySQL username
-        password='5454', # Replace with your MySQL password
-        database='data1'    # Optional: Replace with your database name if needed
-    )
+app = Flask(__name__)
 
-    if connection.is_connected():
-        print("Connected to MySQL database")
+# Route to handle the form page
+@app.route('/')
+def index():
+    return render_template('newTechEntry.html')
 
-        # Create a cursor object to execute queries
-        cursor = connection.cursor()
+# Route to handle the form submission
+@app.route('/submit_data', methods=['POST'])
+def submit_data():
+    # Get data from the form
+    data = request.get_json()
+    newTechName = data.get('newTech')
+    response = { 'newTech' : newTechName, 'message' : 'verified' }
 
-        # Execute your MySQL query here (e.g., show all databases)
-        cursor.execute("SHOW DATABASES;")
+    # Return result to the HTML page
+    return jsonify(response)
 
-        # Fetch all the results
-        databases = cursor.fetchall()
+if __name__ == '__main__':
+    app.run(debug=True)
 
-        # Print the results
-        for db in databases:
-            print(db)
 
-    cursor.execute("CREATE DATABASE new1_database;")
-    cursor.execute("""
-        CREATE TABLE users1 (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(255),
-            email VARCHAR(255)
-        );
-    """)
-    cursor.execute("""
-        use new1_database
-        INSERT INTO users (name, email) VALUES ('John Doe', 'john@example.com');
-    """)
-    connection.commit()  # Commit changes to save the insert
-    sql = "INSERT INTO users (name, email) VALUES (%s, %s)"
-    val = ("John Doe", "john@example.com")
-    cursor.execute(sql, val)
-    connection.commit()
+# from flask import Flask, render_template
 
-except Error as e:
-    print(f"Error: {e}")
-finally:
-    if connection.is_connected():
-        cursor.close()
-        connection.close()
-        print("MySQL connection is closed")
+# app = Flask(__name__)
+
+# @app.route('/')
+# def home():
+#     return render_template('newTechEntry.html')
+
+# if __name__ == '__main__':
+#     app.run(debug=True)
