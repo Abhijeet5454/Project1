@@ -1,0 +1,59 @@
+/* Fixed Header */
+.fixed-header {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    font-size: 16px;
+    position: fixed;
+    margin-left: -10px;
+    top: 0;
+    width: 100%;
+    height: 30;
+    background-color: #ddc891;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    /* padding: 1px 0; */
+    z-index: 1000; /* Stay on top of everything */
+}
+.logo {
+    height: 30px;   /* Adjust the height */
+    width: auto;    /* Maintain aspect ratio */
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;  /* Add space between logo and text */
+}
+
+/* Logo container styling */
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+/* Left panel */
+.left-panel {
+    width: 200px;
+    height: 100%;
+    background-color: #a780ad;
+    position: fixed;
+    padding: 10px;
+    left: -170px; /* Initially hidden off-screen */
+    top: 60px; /* Below the fixed header */
+    transition: left 0.3s ease; /* Smooth slide-in effect */
+    z-index: 999;
+}
+
+/* Show the panel when the hover-box is hovered */
+.hover-active #left-panel {
+    left: 0; /* Slide in the panel */
+}
+
+/* Main content */
+.content {
+    margin-left: 20px;
+    padding: 100px;
+    transition: margin-left 0.3s ease; /* Smooth content shift */
+}
+
+.hover-active .content {
+    filter: blur(5px); /* Move the content to the right when the panel is visible */
+}

@@ -1,4 +1,19 @@
-#Setup connection with database
+#%% Libraries
+from pymongo import MongoClient
+import mysql.connector
+from flask import Flask, render_template, request, jsonify
+
+#%% Setup connection with MongoDB database
+# Connection URL
+client = MongoClient("mongodb://localhost:27017/")
+
+# Access a specific database
+vmainDB = client.mainDB
+
+vmainCol = vmainDB.maincollection
+vinfoCol = vmainDB.infocollection
+
+#%% Setup connection with MySQL database
 try:
     # Connect to MySQL Server
     connection = mysql.connector.connect(
@@ -20,29 +35,69 @@ try:
 except Error as e:
     print(f"Error: {e}")
 
-# finally:
-#     if connection.is_connected():
-#         cursor.close()
-#         connection.close()
-#         print("MySQL connection is closed")
+finally:
+    if connection.is_connected():
+        cursor.close()
+        connection.close()
+        print("MySQL connection is closed")
 
 
-#Display on web
-from flask import Flask, render_template
-
+#%% Display on web
 app = Flask(__name__)
 
+# Route to handle the form page
 @app.route('/')
-def home():
-    return render_template('index.html')
+def index():
+    return render_template('homePage.html')
+
+@app.route('/newTechEntry')
+def index():
+    return render_template('newTechEntry.html')
+
+# Route to handle the data submission
+@app.route('/verifyDuplicate', methods=['POST'])
+def submit_data():
+    # Get data from the form
+    newTechName = request.get_json()
+
+    # response = verify_duplicate(newTechName)
+    response = newTechName + "is entered"
+    # Return result to the HTML page
+    return jsonify(response)
 
 if __name__ == '__main__':
     app.run(debug=True)
 
+
+#%% Functions
+
+def verify_duplicate(text):
+    return True
+
+def verify_techName():
+    return True
+
+def create_techName(): #Temporary techname with ID with verify if its unique
+    return True
+
+def delete_techName():
+    return True
+
+def create_tech():
+    return True
+
+def delete_tech(): #if tech deleted option to keep Techname or delete all
+    return True
+
+def edit_tech():
+    return True
+
+def edit_info():
+    return True
+
 #______________________________________________________
 #Create tech - name(check for duplicate), blocks, details
-def createTech():
-    
+
 
 #______________________________________________________
 #Edit tech - details, rearrangement in block, modify/add - blocks, links, 
@@ -50,4 +105,3 @@ def createTech():
 
 #______________________________________________________
 #Optional - for multiple copy merge tech together
-

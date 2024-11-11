@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="..\static\css\commonLayout.css"> <!-- Linking CSS -->
+    {% block extra_css %}
+    {% endblock %}
+    <title>{% block title %}KnowS{% endblock %}</title>
+</head>
+<body>
+    <header class="fixed-header">
+        <h1>KnowR</h1>
+    </header>
+
+    <div class="left-panel" id="left-panel">
+        <h2>Navigation Panel</h2>
+        <p href="/">Home Page</p>
+        <p href="/newTechEntry">Create new tech</p>
+        <p>List of tech</p>
+    </div>
+
+    <div class="content">
+        {% block content %}
+        <!-- Content of the specific page will go here -->
+        {% endblock %}
+    </div>
+
+    <script src="..\static\js\commonLayout.js"></script> <!-- Link to the JavaScript file -->
+    {% block extra_js %}
+    {% endblock %}
+</body>
+</html>
