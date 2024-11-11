@@ -1,35 +1,33 @@
+<!-- Trial -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Calculator</title>
+    <title>Hover Panel Example</title>
+    <link rel="stylesheet" href="..\static\css\commonLayout.css"> <!-- Linking CSS -->
 </head>
 <body>
-    <h1>Simple Calculator</h1>
-    
-    <form action="/calculate" method="POST">
-        <label for="num1">Number 1:</label>
-        <input type="number" id="num1" name="num1" step="any" required><br><br>
+    <!-- Fixed Header -->
+    <header class="fixed-header">
+        <h1>Fixed Header</h1>
+    </header>
 
-        <label for="num2">Number 2:</label>
-        <input type="number" id="num2" name="num2" step="any" required><br><br>
+    <!-- Left Panel (Initially hidden) -->
+    <div class="left-panel" id="left-panel">
+        <h2>Left Panel</h2>
+        <p href="/">Home Page</p>
+        <p href="/newTechEntry">Create new tech</p>
+        <p>List of tech</p>
+    </div>
 
-        <label for="operation">Operation:</label>
-        <select id="operation" name="operation">
-            <option value="add">Add</option>
-            <option value="subtract">Subtract</option>
-            <option value="multiply">Multiply</option>
-            <option value="divide">Divide</option>
-        </select><br><br>
+    <!-- Main content -->
+    <div class="content">
+        <h1>Welcome to the Hover Panel Project</h1>
+        <p>Hover over the top-left box to activate the left panel.</p>
+    </div>
 
-        <button type="submit">Calculate</button>
-    </form>
-
-    <!-- Display result if available -->
-    {% if result %}
-        <h2>Result: {{ result }}</h2>
-    {% endif %}
+    <script src="..\static\js\commonLayout.js"></script> <!-- Linking JavaScript -->
 </body>
 </html>
-

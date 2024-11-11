@@ -1,18 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Tech Entry</title>
-</head>
-<body>
-    <h1>New Tech Entry</h1>
+<!-- /templates/index.html -->
+{% extends "base.html" %}
+
+{% block title %}New Tech Entry{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="..\static\css\newTechEntryCss.css"> <!-- Linking CSS -->
+{% endblock %}
+{% block content %}
+<h1>Create new Tech</h1>
+<p>Basic info</p>
+<label for="newTech">Name: </label>
+<input type="text" id="newTech" placeholder="Enter Name">
+<button type="button" onclick="verifyDuplicate()">Verify Duplicate</button>
+<!-- Display result if available -->
+<p id="response"></p>
+
+<p>Add custom blocks</p>
+<form id="customForm">
+    <div class="form-group">
+        <label for="introduction">Enter basic information about Tech </label>
+        <input type="text" id="introduction" placeholder="Introduction">
+    </div>
+    <div class="form-group">
+        <label for="tags">Enter tags with comma </label>
+        <input type="text" id="tags" placeholder="Tags">
+    </div>
+    <div class="form-group">
+        <label for="customBlockName">Enter Block Name: </label>
+        <input type="text" id="customBlockName" placeholder="Block Name">
+    </div>
     
-    <label for="newTech">Name:</label>
-    <input type="text" id="newTech" placeholder="Enter Name"><br><br>
-    <button type="button" onclick="submitData()">Verify Duplicate</button>
-    <script src="..\static\js\newTechEntryScript.js"></script> <!-- Link to the JavaScript file -->
-    <!-- Display result if available -->
-    <p id="response"></p>
-</body>
-</html>
+    <!-- Add custom block -->
+    <button type="button" onclick="addCustomBlock()">Add Block</button>    
+    <div id="customBlockContainer"></div>
+    <button type="submit">Create</button>
+</form>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="..\static\js\newTechEntryScript.js"></script> <!-- Link to the JavaScript file -->
+{% endblock %}
+

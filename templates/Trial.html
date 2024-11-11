@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Custom Fields with Custom Names</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Dynamic Form with Custom Fields and Names</h2>
+    <form id="dynamicForm">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+        <!-- Input for custom field name -->
+        <div class="form-group">
+            <label for="customFieldName">Custom Field Name:</label>
+            <input type="text" id="customFieldName" placeholder="Enter custom field name">
+        </div>
+        <!-- Container where new fields will be added -->
+        <div id="customFieldsContainer"></div>
+        <button type="button" onclick="addCustomField()">Add Custom Field</button><br><br>
+        <button type="submit">Submit</button>
+    </form>
+    <script>
+        let fieldCounter = 0;
+        // Function to add a custom field with a custom name
+        function addCustomField() {
+            const customFieldName = document.getElementById("customFieldName").value.trim();
+            // Ensure the custom field name is provided
+            if (!customFieldName) {
+                alert("Please enter a custom field name.");
+                return;
+            }
+            fieldCounter++;
+            
+            // Create a new div for the custom field
+            const newFieldDiv = document.createElement("div");
+            newFieldDiv.classList.add("form-group");
+            newFieldDiv.id = `customField${fieldCounter}`;
+            // Create the label for the new field
+            const newLabel = document.createElement("label");
+            newLabel.textContent = `${customFieldName}:`;
+            newLabel.htmlFor = `customFieldInput${fieldCounter}`;
+            // Create the input for the new field
+            const newInput = document.createElement("input");
+            newInput.type = "text";
+            newInput.id = `customFieldInput${fieldCounter}`;
+            newInput.name = customFieldName; // Use the custom field name as the input name
+            newInput.placeholder = `Enter value for ${customFieldName}`;
+            newInput.required = true;
+            // Create a remove button for the field
+            const removeButton = document.createElement("button");
+            removeButton.type = "button";
+            removeButton.textContent = "Remove";
+            removeButton.onclick = () => removeCustomField(fieldCounter);
+            // Append the label, input, and remove button to the div
+            newFieldDiv.appendChild(newLabel);
+            newFieldDiv.appendChild(newInput);
+            newFieldDiv.appendChild(removeButton);
+            // Append the new field div to the custom fields container
+            document.getElementById("customFieldsContainer").appendChild(newFieldDiv);
+            // Clear the custom field name input
+            document.getElementById("customFieldName").value = '';
+        }
+        // Function to remove a custom field
+        function removeCustomField(fieldId) {
+            const fieldToRemove = document.getElementById(`customField${fieldId}`);
+            if (fieldToRemove) {
+                fieldToRemove.remove();
+            }
+        }
+        // Optional: Handle form submission
+        document.getElementById("dynamicForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent default form submission for demonstration
+            // Gather form data
+            const formData = new FormData(this);
+            const formValues = Object.fromEntries(formData.entries());
+                 
+            // Display the submitted data
+            alert("Form Submitted: " + JSON.stringify(formValues, null, 2));
+        });
+    </script>
+</body>
+</html>
